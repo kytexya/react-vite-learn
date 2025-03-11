@@ -4,11 +4,16 @@
 import './style.css';
 
   const MyComponent = () => {
+    const kyte = "abcdefghjk";
     return (
         <>
             
-            <div> abcdefgh </div>
-            <div className='child'>child</div>
+            <div>{kyte} abcdefgh </div>
+            <div>{console.log("kyte")}</div>
+            <div className='child'
+            style={
+                {borderRadius:"10px"}}
+            >child</div>
         </>
     );
   }
