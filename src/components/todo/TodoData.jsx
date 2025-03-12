@@ -1,3 +1,5 @@
+//props la mot bien object {}
+//const { name, age, data} = props;
 
 const TodoData = (props) => {
     console.log(">>> check props: ", props)
