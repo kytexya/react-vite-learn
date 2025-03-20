@@ -5,15 +5,16 @@ import reactLogo from './assets/react.svg'
 import { useState } from 'react';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
 
   const [todoList, setTodoList] = useState([
     //{ id: 1, name: "Learning React"},
     //{ id: 2, name: "Watching youtube"}
-    
+
   ])
-  
+
 
   const addNewTodo = (name) => {
     const newTodo = {
@@ -32,7 +33,7 @@ const App = () => {
   const deleteTodo = (id) => {
     const newTodo = todoList.filter(item => item.id !== id)
     setTodoList(newTodo);
-  
+
   }
 
   return (
@@ -46,19 +47,19 @@ const App = () => {
 
 
         {todoList.length > 0 ?
-        <TodoData
-          todoList={todoList}
-          deleteTodo={deleteTodo}
-        />     
-        :  
+          <TodoData
+            todoList={todoList}
+            deleteTodo={deleteTodo}
+          />
+          :
           <div className='todo-image'>
             <img src={reactLogo} className='logo' />
           </div>
-  }
+        }
 
-        
-            
-  {/*todoList.length > 0 &&        
+
+
+        {/*todoList.length > 0 &&        
         <TodoData   
           todoList={todoList}       
         />     
@@ -69,6 +70,7 @@ const App = () => {
         </div>
       */}
       </div>
+      <Outlet />
       <Footer />
     </>
   )
