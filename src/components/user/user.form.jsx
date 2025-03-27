@@ -1,15 +1,24 @@
 import { Button, Input } from "antd";
 import Password from "antd/es/input/Password";
 import { useState } from "react";
+import axios from "axios";
 
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [phone, setPhone] = useState("");
 
     const handleClickBtn = () => {
-        alert("User created successfully")
+        const URL_BACKEND = "http://localhost:8080/api/v1/user";
+        const data = {
+            fullName: fullName,
+            email: email, 
+            password: password,
+            phone: phone
+        }
+        axios.post(URL_BACKEND, data)
+        console.log(">>> chech state:",{ fullName, email, password, phoneNumber });
     }
     return (
         <div className="user-form" style={{margin: "20px 0"}}>
@@ -38,8 +47,8 @@ const UserForm = () => {
                 <div>
                     <span>Phone number</span>
                     <Input
-                        value={phoneNumber}
-                        onChange={(event) => { setPhoneNumber(event.target.value) }}
+                        value={phone}
+                        onChange={(event) => { setPhone(event.target.value) }}
                     />
                 </div>
                 <div>
