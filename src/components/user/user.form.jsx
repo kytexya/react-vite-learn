@@ -3,7 +3,8 @@ import Password from "antd/es/input/Password";
 import { useState } from "react";
 import { createUserAPI } from "../../services/api.service";
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props;
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +20,8 @@ const UserForm = () => {
                 message: "Create user successfully",
                 description: "User created successfully",               
             })
-            setIsModalOpen(false);
+             resetAndCloseModal();
+             await loadUser();
        }else {
             notification.error({
                 message: "Error create user",
@@ -27,6 +29,14 @@ const UserForm = () => {
             })
         }
             
+    }
+
+    const resetAndCloseModal = () => {
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+        setIsModalOpen(false);
     }
 
     return (
@@ -42,7 +52,7 @@ const UserForm = () => {
                 title="Create user"
                 open={isModalOpen}
                 onOk={() => handleSubmitBtn()}
-                onCancel={() => setIsModalOpen(false)}
+                onCancel={() => resetAndCloseModal(false)}
                 maskClosable={false}
                 okText ="Create"
             >

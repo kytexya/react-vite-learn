@@ -4,16 +4,8 @@ import { useEffect, useState } from 'react';
 import { use } from 'react';
 
 
-const UserTable = () => {
-    const [dataUsers, setDataUsers] = useState([
-       
-    ]);  
-
-    useEffect(() => {
-        console.log(">>> run useEffect 111")
-        loadUser();
-    }, []);
-        
+const UserTable = (props) => {
+    const { dataUsers } = props;
 
     const columns = [
         {
@@ -56,13 +48,10 @@ const UserTable = () => {
     //     },
     // ];
 
-    const loadUser = async() => {
-      const res = await fetchALlUserAPI()
-        setDataUsers(res.data)
-    }
+    
 
     
-    console.log(">>> run render 000")
+    
     return (
         <Table columns={columns} 
         dataSource={dataUsers}
