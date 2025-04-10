@@ -2,6 +2,8 @@ import { Space, Table, Tag } from 'antd';
 import { fetchALlUserAPI } from '../../services/api.service';
 import { useEffect, useState } from 'react'; 
 import { use } from 'react';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import UpdateUserModal from './update.user.modal';
 
 
 const UserTable = (props) => {
@@ -11,6 +13,12 @@ const UserTable = (props) => {
         {
             title: 'Id',
             dataIndex: '_id',
+            render: (_, record) => (
+                <>
+                    <a>Invite {record.name}</a>
+                    <a>Delete</a>
+                </>
+            ),
             
         },
         {
@@ -20,7 +28,18 @@ const UserTable = (props) => {
         {
             title: 'Email',
             dataIndex: 'email',
-        }
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <div style={{ display: "flex", gap: "20px" }}>
+                    <EditOutlined style={{cursor:"pointer", color:"orange"}} />
+                    <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
+                </div>
+            ),
+        },
+
         
     ];
     
@@ -53,9 +72,12 @@ const UserTable = (props) => {
     
     
     return (
+        <>
         <Table columns={columns} 
         dataSource={dataUsers}
         rowKey={"_id"} />
+        <UpdateUserModal />
+        </>
     )
 }
 
